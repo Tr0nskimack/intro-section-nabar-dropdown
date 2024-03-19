@@ -1,13 +1,18 @@
-import React from "react";
-import { Navbar } from "../components/Navbar";
-import { BrowserRouter, Routes } from "react-router-dom";
-import { Hero } from "../components/Hero";
+import React from 'react'
+import Navbar from '../components/Navbar'
+import { Hero } from './Hero'
 
-export const Home = () => {
+const Home = () => {
   return (
-    <div className="bg-gray-100 min-h-screen">
-        <Navbar/>
-        <Hero/>
-    </div>
-  );
-};
+    <div className='min-h-screen w-full bg-gray-100'>
+    <Navbar/>
+    <Hero/>
+</div>
+  )
+}
+
+export default Home
+
+
+
+

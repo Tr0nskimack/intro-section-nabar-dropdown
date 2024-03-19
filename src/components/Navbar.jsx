@@ -1,356 +1,230 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { FiMenu } from "react-icons/fi";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
-export const Navbar = () => {
-  const [nav, setNav] = useState(false);
+const Navbar = () => {
+  const [Menu, setMenu] = useState([]);
+  const [Company, setCompany] = useState([]);
 
-  const handleNav = () => {
-    setNav(!nav);
+  const MenuFeatures = [
+    {
+      nombre: "Features",
+      icono: "icon-todo.svg",
+      enlace: "/",
+    },
+    {
+      nombre: "Calendar",
+      icono: "icon-calendar.svg",
+      enlace: "/",
+    },
+    {
+      nombre: "Planning",
+      icono: "icon-planning.svg",
+      enlace: "/",
+    },
+    {
+      nombre: "Reminder",
+      icono: "icon-reminders.svg",
+      enlace: "/",
+    },
+  ];
+  const MenuCompany = [
+    {
+      nombre: "Histoy",
+      enlace: "/",
+    },
+    {
+      nombre: "Our Team",
+      enlace: "/",
+    },
+    {
+      nombre: "Blog",
+      enlace: "/",
+    },
+  ];
+  useEffect(() => {
+    setMenu(MenuFeatures);
+    setCompany(MenuCompany);
+  }, []);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
   };
-
   return (
-    <div className="z-10 mx-auto flex w-full max-w-7x1 justify-between px-4 py-5 text-sm">
+    <div className="mx-auto flex w-full max-w-7xl justify-between px-4 py-5 text-sm">
       {/* left side */}
 
       <section className="flex items-center gap-10">
         {/* logo */}
-        <img src="/logo.svg" className="w-18" alt="imagen" />
-        {/* nav links */}
-        <div className="hidden md:flex items-center gap-10">
-          <div className="flex items-center gap-4 transition-all">
-            <Link to={"/"} className="relative group px-2 py-3 transition-all">
-              <p className="flex items-center gap-2 cursor-pointer text-neutral-400 group-hover:text-black">
-                <span className="font-semibold">Features</span>
-                <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" />
-              </p>
-              {/* dropdown */}
-              <div className="absolute right-0 top-10 hidden w-auto flex-col gap-1 rounded-lg bg-white py-3 shadow-md transition-all group-hover:flex">
-                <Link
-                  to={"#"}
-                  className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                >
-                  {/* image */}
-                  <img src="/notes.svg" className="w-4" alt="item-icon" />
-
-                  {/* item */}
-                  <span className="whitespace-nowrap pl-3">Tareas</span>
-                </Link>
-
-                <Link
-                  to={"#"}
-                  className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                >
-                  {/* image */}
-                  <img
-                    src="/calendar-svgrepo-com.svg"
-                    className="w-4"
-                    alt="item-icon"
-                  />
-
-                  {/* item */}
-                  <span className="whitespace-nowrap pl-3">Calendario</span>
-                </Link>
-                <Link
-                  to={"#"}
-                  className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                >
-                  {/* image */}
-                  <img
-                    src="/time-alert-svgrepo-com.svg"
-                    className="w-4"
-                    alt="item-icon"
-                  />
-
-                  {/* item */}
-                  <span className="whitespace-nowrap pl-3">Recordatorio</span>
-                </Link>
-                <Link
-                  to={"#"}
-                  className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                >
-                  {/* image */}
-                  <img
-                    src="/business-strategy-svgrepo-com.svg"
-                    className="w-4"
-                    alt="item-icon"
-                  />
-
-                  {/* item */}
-                  <span className="whitespace-nowrap pl-3">Planeacion</span>
-                </Link>
-              </div>
-            </Link>
-          </div>
-          {/* company */}
-          <div className="flex items-center gap-4 transition-all">
-            <Link to={"/"} className="relative group px-2 py-3 transition-all">
-              <p className="flex items-center gap-2 cursor-pointer text-neutral-400 group-hover:text-black">
-                <span className="font-semibold">Company</span>
-                <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" />
-              </p>
-              {/* dropdown */}
-              <div className="absolute right-0 top-10 hidden w-auto flex-col gap-1 rounded-lg bg-white py-3 shadow-md transition-all group-hover:flex">
-                <Link
-                  to={"#"}
-                  className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                >
-                  {/* image */}
-                  <img src="/notes.svg" className="w-4" alt="item-icon" />
-
-                  {/* item */}
-                  <span className="whitespace-nowrap pl-3">History</span>
-                </Link>
-
-                <Link
-                  to={"#"}
-                  className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                >
-                  {/* image */}
-                  <img
-                    src="/calendar-svgrepo-com.svg"
-                    className="w-4"
-                    alt="item-icon"
-                  />
-
-                  {/* item */}
-                  <span className="whitespace-nowrap pl-3">Our team</span>
-                </Link>
-                <Link
-                  to={"#"}
-                  className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                >
-                  {/* image */}
-                  <img
-                    src="/time-alert-svgrepo-com.svg"
-                    className="w-4"
-                    alt="item-icon"
-                  />
-
-                  {/* item */}
-                  <span className="whitespace-nowrap pl-3">Blog</span>
-                </Link>
-              </div>
-            </Link>
-          </div>
-          <div className="flex items-center gap-4 transition-all">
-            <Link to={"/"} className="relative group px-2 py-3 transition-all">
-              <p className="flex items-center gap-2 cursor-pointer text-neutral-400 group-hover:text-black">
-                <span className="font-semibold">Carrers</span>
-              </p>
-            </Link>
-          </div>
-          <div className="flex items-center gap-4 transition-all">
-            <Link to={"/"} className="relative group px-2 py-3 transition-all">
-              <p className="flex items-center gap-2 cursor-pointer text-neutral-400 group-hover:text-black">
-                <span className="font-semibold">Acerca</span>
-              </p>
-            </Link>
-          </div>
+        <img src="logo.svg" alt="logo" />
+        <MobileNav />
+        {/* navItems */}
+        <div className="hidden md:flex items-center gap-4 transition-all">
+          <Link className="relative group px-2 py-3 transition-all">
+            <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+              Features
+              <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" />
+            </p>
+            {/* dropwown */}
+            <div className="absolute rigt-0 top-10 hidden w-auto flex-col gap-1 rounded-lg bg-white py-3 shadow-md transition-all group-hover:flex">
+              {Menu.map((featu) => {
+                return (
+                  <Link className="flex gap-2 cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black">
+                    <img src={featu.icono} alt="icono" />
+                    <span key={featu.id} className="whitespace-nowrap pl-2">
+                      {featu.nombre}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </Link>
+          <Link className="relative group px-2 py-3 transition-all">
+            <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+              Company
+              <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" />
+            </p>
+            {/* dropwown */}
+            <div className="absolute rigt-0 top-10 hidden w-auto flex-col gap-1 rounded-lg bg-white py-3 shadow-md transition-all group-hover:flex">
+              {Company.map((compa) => {
+                return (
+                  <Link className="flex gap-2 cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black">
+                    <span key={compa.id} className="whitespace-nowrap pl-2">
+                      {compa.nombre}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </Link>
+          <Link className="relative group px-2 py-3 transition-all">
+            <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+              Carrer
+            </p>
+          </Link>
+          <Link className="relative group px-2 py-3 transition-all">
+            <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+              About
+            </p>
+          </Link>
         </div>
       </section>
-      {/* right side data */}
-      <section className=" hidden md:flex items-center gap-8">
-        <button className="text-neutral-400 transition-all hover:text-black/90 hover:font-bold h-fit">
+      {/* buttons */}
+      <section className="hidden md:flex items-center gap-8">
+        <button className="h-fit text-neutral-400 transition-all hover:text-black/90">
           Login
         </button>
-        <button className="text-neutral-400 rounded-xl border-2 hover:border-black hover:font-bold px-4 py-2 transition-all hover:text-black/90 h-fit">
+        <button className="h-fit text-neutral-400 rounded-xl transition-all hover:border-2 border-2 border-neutral-400 px-4 py-2 hover:border-black hover:text-black/90">
           Registro
         </button>
       </section>
-
-      {/* mobile de aqui para abajo*/}
-      <div className="z-20">
-        <div onClick={handleNav} className="block md:hidden text-black_p cursor-pointer">
-          {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-        </div>
-
-        <div
-          className={
-            nav
-              ? "text-gray-300 fixed h-full right-0 top-0 w-[60%] border-l border-l-900 bg-White_p ease-in-out duration-500"
-              : "fixed right-[-100%]"
-          }
-        >
-          <div className="flex justify-end mt-5 pr-5">
-            <div onClick={handleNav} className="block md:hidden text-black_p cursor-pointer">
-              {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
-            </div>
-          </div>
-
-          {/* menu mobile */}
-          <div className="flex flex-col justify-between">
-            <div className="flex items-center gap-4 transition-all pl-4">
-              <Link
-                to={"/"}
-                className="relative group px-2 py-3 transition-all"
-              >
-                <p className="flex items-center gap-2 cursor-pointer text-neutral-400 group-hover:text-black">
-                  <span className="font-semibold text-lg">Features</span>
-                  <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" />
-                </p>
-                {/* dropdown */}
-                <div className="absolute left-5 top-10 hidden w-auto flex-col gap-1 rounded-lg bg-white_p py-3 transition-all group-hover:flex">
-                  <Link
-                    to={"#"}
-                    className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                  >
-                    {/* image */}
-                    <img src="/notes.svg" className="w-4" alt="item-icon" />
-
-                    {/* item */}
-                    <span className="whitespace-nowrap pl-3 text-lg">
-                      Tareas
-                    </span>
-                  </Link>
-
-                  <Link
-                    to={"#"}
-                    className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                  >
-                    {/* image */}
-                    <img
-                      src="/calendar-svgrepo-com.svg"
-                      className="w-4"
-                      alt="item-icon"
-                    />
-
-                    {/* item */}
-                    <span className="whitespace-nowrap pl-3 text-lg">
-                      Calendario
-                    </span>
-                  </Link>
-                  <Link
-                    to={"#"}
-                    className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                  >
-                    {/* image */}
-                    <img
-                      src="/time-alert-svgrepo-com.svg"
-                      className="w-4"
-                      alt="item-icon"
-                    />
-
-                    {/* item */}
-                    <span className="whitespace-nowrap pl-3 text-lg">
-                      Recordatorio
-                    </span>
-                  </Link>
-                  <Link
-                    to={"#"}
-                    className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                  >
-                    {/* image */}
-                    <img
-                      src="/business-strategy-svgrepo-com.svg"
-                      className="w-4"
-                      alt="item-icon"
-                    />
-
-                    {/* item */}
-                    <span className="whitespace-nowrap pl-3 text-lg">
-                      Planeacion
-                    </span>
-                  </Link>
-                </div>
-              </Link>
-            </div>
-            {/* company */}
-            <div className="flex items-center gap-4 transition-all mt-[160px] pl-4">
-              <Link
-                to={"/"}
-                className="relative group px-2 py-3 transition-all"
-              >
-                <p className="flex items-center gap-2 cursor-pointer text-neutral-400 group-hover:text-black">
-                  <span className="font-semibold text-lg">Company</span>
-                  <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" />
-                </p>
-                {/* dropdown */}
-                <div className="absolute left-10 top-10 hidden w-auto flex-col gap-1 rounded-lg bg-white_p py-3 transition-all group-hover:flex">
-                  <Link
-                    to={"#"}
-                    className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                  >
-                    {/* image */}
-                    <img src="/notes.svg" className="w-4" alt="item-icon" />
-
-                    {/* item */}
-                    <span className="whitespace-nowrap pl-3 text-lg">
-                      History
-                    </span>
-                  </Link>
-
-                  <Link
-                    to={"#"}
-                    className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                  >
-                    {/* image */}
-                    <img
-                      src="/calendar-svgrepo-com.svg"
-                      className="w-4"
-                      alt="item-icon"
-                    />
-
-                    {/* item */}
-                    <span className="whitespace-nowrap pl-3 text-lg">
-                      Our team
-                    </span>
-                  </Link>
-                  <Link
-                    to={"#"}
-                    className="flex cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
-                  >
-                    {/* image */}
-                    <img
-                      src="/time-alert-svgrepo-com.svg"
-                      className="w-4"
-                      alt="item-icon"
-                    />
-
-                    {/* item */}
-                    <span className="whitespace-nowrap pl-3 text-lg">Blog</span>
-                  </Link>
-                </div>
-              </Link>
-            </div>
-            {/* carrers about */}
-            <div className="flex flex-col justify-start mt-[100px]">
-              <div className="flex items-center gap-4 transition-all">
-                <Link
-                  to={"/"}
-                  className="relative group px-2 py-3 transition-all"
-                >
-                  <p className="flex items-center gap-2 cursor-pointer text-neutral-400 group-hover:text-black">
-                    <span className="font-semibold text-lg">Carrers</span>
-                  </p>
-                </Link>
-              </div>
-              <div className="flex items-center gap-4 transition-all">
-                <Link
-                  to={"/"}
-                  className="relative group px-2 py-3 transition-all"
-                >
-                  <p className="flex items-center gap-2 cursor-pointer text-neutral-400 group-hover:text-black">
-                    <span className="font-semibold text-lg">About</span>
-                  </p>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <section className="flex flex-col gap-8 items-center mt-[60px]">
-            <button className="text-neutral-400 transition-all hover:text-black/90 hover:font-bold h-fit">
-              Login
-            </button>
-            <button className="text-neutral-400 rounded-xl border-2 hover:border-black hover:font-bold px-12 py-2 transition-all hover:text-black/90 h-fit">
-              Registro
-            </button>
-          </section>
-        </div>
-      </div>
+      <FiMenu
+        onClick={toggleMenu}
+        className="cursor-pointer text-4xl md:hidden"
+      />
     </div>
   );
+
+  function MobileNav() {
+    const [parent, enable] = useAutoAnimate({ duration: 500 });
+
+    return (
+      <div
+        ref={parent}
+        className={`fixed left-0 top-0 flex h-full min-h-screen w-full justify-end bg-black/60 transition-all duration-500 md:hidden ${
+          isOpen ? "block" : "hidden"
+        }`}
+      >
+        <div className="h-full w-[65%] bg-white px-4 py-4">
+          <section className="flex justify-end">
+            <AiOutlineClose
+              className="cursor-pointer text-4xl"
+              onClick={toggleMenu}
+            />
+          </section>
+          {/* mobile items */}
+          <div className="flex flex-col items-center gap-4 transition-all">
+            <Link className="relative group px-2 py-3 transition-all">
+              <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+                Features
+                <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" />
+              </p>
+              {/* dropwown */}
+
+              <div className="absolute rigt-0 top-10 hidden w-auto flex-col gap-1 rounded-lg bg-white py-3 shadow-md transition-all group-hover:flex">
+                {Menu.map((featu) => {
+                  return <SingleNavItem featu={featu} key={featu.nombre} />;
+                })}
+              </div>
+            </Link>
+
+            <Link className="relative group px-2 py-3 transition-all">
+              <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+                Company
+                <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" />
+              </p>
+              {/* dropwown */}
+              <div className="absolute rigt-0 top-10 hidden w-auto flex-col gap-1 rounded-lg bg-white py-3 shadow-md transition-all group-hover:flex">
+                {Company.map((compa) => {
+                  return (
+                    <Link
+                      key={compa.id}
+                      className="flex gap-2 cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
+                    >
+                      <span key={compa.id} className="whitespace-nowrap pl-2">
+                        {compa.nombre}
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </Link>
+            <Link className="relative group px-2 py-3 transition-all">
+              <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+                Carrer
+              </p>
+            </Link>
+            <Link className="relative group px-2 py-3 transition-all">
+              <p className="flex cursor-pointer items-center gap-2 text-neutral-400 group-hover:text-black">
+                About
+              </p>
+            </Link>
+            {/* buttons */}
+            <section className="flex flex-col items-center gap-8 mt-40">
+              <button className="h-fit text-neutral-400 transition-all hover:text-black/90">
+                Login
+              </button>
+              <button className="h-fit text-neutral-400 rounded-xl transition-all hover:border-2 border-2 border-neutral-400 px-4 py-2 w-[250px] hover:border-black hover:text-black/90">
+                Registro
+              </button>
+            </section>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function SingleNavItem({ featu }) {
+    const [isItemOpen, setItem] = useState(false);
+    const toggleItem = () => {
+      /* alert("hola") */
+      setItem(!isItemOpen);
+    };
+    return (
+      <div>
+        <Link
+          onClick={toggleItem}
+          className="flex gap-2 cursor-pointer items-center py-1 pl-6 pr-8 text-neutral-400 hover:text-black"
+        >
+          <img src={featu.icono} alt="icono" />
+          <span className="whitespace-nowrap pl-2">{featu.nombre}</span>
+        </Link>
+      </div>
+    );
+  }
 };
+export default Navbar;
